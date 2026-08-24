@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -5,41 +7,34 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Project Information -->
     <groupId>com.smarthostel</groupId>
     <artifactId>HostelManagementSystem</artifactId>
-
     <version>0.0.1-SNAPSHOT</version>
 
+    <!-- WAR Application -->
     <packaging>war</packaging>
 
     <name>HostelManagementSystem</name>
 
+    <!-- Properties -->
     <properties>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
 
+        <!-- SonarQube -->
         <sonar.projectKey>HostelManagement</sonar.projectKey>
         <sonar.projectName>HostelManagement</sonar.projectName>
+
     </properties>
 
-    <distributionManagement>
-
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://100.31.42.86:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
-
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://100.31.42.86:8081/repository/maven-releases/</url>
-        </repository>
-
-    </distributionManagement>
-
+    <!-- Dependencies -->
     <dependencies>
 
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -47,6 +42,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -54,6 +50,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -62,12 +59,15 @@
 
     </dependencies>
 
+    <!-- Build Configuration -->
     <build>
 
+        <!-- Generated WAR -->
         <finalName>HostelManagementSystem</finalName>
 
         <plugins>
 
+            <!-- Maven Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -80,12 +80,14 @@
 
             </plugin>
 
+            <!-- WAR Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
             </plugin>
 
+            <!-- SonarQube -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
