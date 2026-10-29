@@ -1,3 +1,4 @@
+
 name: HostelManagementSystem Maven CI
 
 on:
@@ -49,22 +50,18 @@ jobs:
           WAR_FILE="target/HostelManagementSystem.war"
 
           if [ ! -f "$WAR_FILE" ]; then
-            echo "ERROR: Expected WAR file was not generated: $WAR_FILE"
-            echo "Files available in target directory:"
+            echo "ERROR: WAR file not found: $WAR_FILE"
+            echo "Available files in target/:"
             ls -lah target/ || true
             exit 1
           fi
 
-          echo "WAR file generated successfully:"
+          echo "WAR generated successfully:"
           ls -lh "$WAR_FILE"
 
       - name: Upload WAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: HostelManagementSystem-war
-          path: target/HostelManagementSystem.war
-          if-no-files-found: error
-          retention-days: 7
           name: HostelManagementSystem-war
           path: target/HostelManagementSystem.war
           if-no-files-found: error
