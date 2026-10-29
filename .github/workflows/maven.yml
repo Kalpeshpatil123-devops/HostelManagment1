@@ -1,10 +1,12 @@
-name: HostelManagementSystem - Maven CI
+name: HostelManagementSystem Maven CI
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master]
+    branches:
+      - master
   workflow_dispatch:
 
 permissions:
@@ -16,7 +18,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build and Test Java 17 WAR
+    name: Build and Test WAR
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +32,7 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Display Java and Maven versions
+      - name: Show Java and Maven versions
         run: |
           java -version
           mvn -version
@@ -41,10 +43,20 @@ jobs:
       - name: Build and run tests
         run: mvn --batch-mode clean verify
 
-      - name: Verify WAR artifact
+      - name: Verify WAR file
+        shell: bash
         run: |
-          test -f target/HostelManagementSystem.war
-          ls -lh target/HostelManagementSystem.war
+          WAR_FILE="target/HostelManagementSystem.war"
+
+          if [ ! -f "$WAR_FILE" ]; then
+            echo "ERROR: Expected WAR file was not generated: $WAR_FILE"
+            echo "Files available in target directory:"
+            ls -lah target/ || true
+            exit 1
+          fi
+
+          echo "WAR file generated successfully:"
+          ls -lh "$WAR_FILE"
 
       - name: Upload WAR artifact
         uses: actions/upload-artifact@v4
